@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:cloudspanner:/projects/poc-project-384302/instances/doctor-instance/databases/doctor
+  cloud:
+    gcp:
+      spanner:
+        project-id: poc-project-384302
+  liquibase:
+    url: jdbc:cloudspanner:/projects/poc-project-384302/instances/doctor-instance/databases/doctor

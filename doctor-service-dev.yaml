@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:cloudspanner://localhost:9010/projects/poc-project-384302/instances/doctor-instance/databases/doctor;usePlainText=true
+  cloud:
+    gcp:
+      spanner:
+        emulator:
+          enabled: true
+
+  liquibase:
+    url: jdbc:cloudspanner://localhost:9010/projects/poc-project-384302/instances/doctor-instance/databases/doctor;usePlainText=true

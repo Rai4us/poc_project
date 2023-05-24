@@ -1,0 +1,54 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.google.cloud.spanner.jdbc.JdbcDriver
+  jpa:
+    database-platform: com.google.cloud.spanner.hibernate.SpannerDialect
+    show-sql: true
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///${user.home}/config
+    gcp:
+      spanner:
+        instance-id: doctor-instance
+        database: doctor
+        project-id: poc-project-384302
+
+  main:
+    allow-bean-definition-overriding: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+    driver-class-name: com.google.cloud.spanner.jdbc.JdbcDriver
+
+service:
+  name: doctor-service
+
+pubsub:
+  topic: prescriptionSendingTopic
+
+openai-service:
+  api-key: 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
+  gpt-model: gpt-3.5-turbo
+  audio-model: whisper-1
+  http-client:
+    read-timeout: 20000
+    connect-timeout: 3000
+  urls:
+    base-url: https://api.openai.com/v1
+    chat-url: /chat/completions
+    create-transcription-url: /audio/translations
+
+togglz:
+  enabled: true
+  feature-enums: org.shevchenko.edu.feature.DoctorFeatures
+  console:
+    enabled: true
+    path: /togglz-console
+    secured: false
+    use-management-port: false
